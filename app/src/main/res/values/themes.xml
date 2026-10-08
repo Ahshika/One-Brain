@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.OneBrain" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/ob_primary</item>
+        <item name="colorOnPrimary">@color/ob_on_primary</item>
+        <item name="colorPrimaryContainer">@color/ob_primary_soft</item>
+        <item name="colorOnPrimaryContainer">@color/ob_primary</item>
+        <item name="colorSecondary">@color/ob_gold</item>
+        <item name="colorOnSecondary">#1A1300</item>
+        <item name="colorSecondaryContainer">@color/ob_primary_soft</item>
+        <item name="colorOnSecondaryContainer">@color/ob_primary</item>
+        <item name="colorError">@color/ob_error</item>
+        <item name="android:colorBackground">@color/ob_bg</item>
+        <item name="colorSurface">@color/ob_surface</item>
+        <item name="colorOnSurface">@color/ob_text</item>
+        <item name="colorOnSurfaceVariant">@color/ob_text_secondary</item>
+        <item name="colorOutline">@color/ob_stroke</item>
+        <item name="colorOutlineVariant">@color/ob_stroke</item>
+        <item name="colorSurfaceContainerLowest">@color/ob_surface</item>
+        <item name="colorSurfaceContainerLow">@color/ob_surface</item>
+        <item name="colorSurfaceContainer">@color/ob_surface</item>
+        <item name="colorSurfaceContainerHigh">@color/ob_surface</item>
+        <item name="colorSurfaceContainerHighest">@color/ob_surface_alt</item>
+        <item name="android:windowBackground">@color/ob_bg</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="materialCardViewStyle">@style/Widget.OneBrain.Card</item>
+        <item name="materialButtonStyle">@style/Widget.OneBrain.Button</item>
+        <item name="toolbarStyle">@style/Widget.OneBrain.Toolbar</item>
+    </style>
+
+    <style name="Theme.OneBrain.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/ob_splash_bg</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
+        <item name="windowSplashScreenAnimationDuration">300</item>
+        <item name="postSplashScreenTheme">@style/Theme.OneBrain</item>
+    </style>
+
+    <!-- Widgets -->
+    <style name="Widget.OneBrain.Card" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">@color/ob_surface</item>
+        <item name="cardCornerRadius">@dimen/radius_card</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">@color/ob_stroke</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="Widget.OneBrain.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">16dp</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:stateListAnimator">@animator/press_scale</item>
+    </style>
+
+    <style name="Widget.OneBrain.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="cornerRadius">16dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:stateListAnimator">@animator/press_scale</item>
+    </style>
+
+    <style name="Widget.OneBrain.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">16dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="strokeColor">@color/ob_stroke</item>
+        <item name="android:stateListAnimator">@animator/press_scale</item>
+    </style>
+
+    <style name="Widget.OneBrain.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.OneBrain.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="titleTextAppearance">@style/TextAppearance.OneBrain.ToolbarTitle</item>
+        <item name="navigationIconTint">@color/ob_text</item>
+    </style>
+
+    <!-- Text -->
+    <style name="TextAppearance.OneBrain.Display" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textColor">@color/ob_text</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+    </style>
+
+    <style name="TextAppearance.OneBrain.Headline" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textColor">@color/ob_text</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+    </style>
+
+    <style name="TextAppearance.OneBrain.ToolbarTitle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">@color/ob_text</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+    </style>
+
+    <style name="TextAppearance.OneBrain.Title" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textColor">@color/ob_text</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.OneBrain.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/ob_text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.OneBrain.Caption" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textColor">@color/ob_text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.OneBrain.Section" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textColor">@color/ob_text_secondary</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.OneBrain.Pill" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:background">@drawable/bg_pill</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:textColor">@color/ob_text</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.OneBrain.Chip" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_chip</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/ob_text</item>
+    </style>
+</resources>

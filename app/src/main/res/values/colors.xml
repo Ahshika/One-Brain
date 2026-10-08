@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand -->
+    <color name="ob_primary">#5B4BF5</color>
+    <color name="ob_primary_variant">#8B5CF6</color>
+    <color name="ob_on_primary">#FFFFFF</color>
+    <color name="ob_primary_soft">#ECEAFF</color>
+    <color name="ob_gold">#FFB020</color>
+    <color name="ob_gold_soft">#FFF3D6</color>
+
+    <!-- Surfaces & text -->
+    <color name="ob_bg">#F5F6FB</color>
+    <color name="ob_surface">#FFFFFF</color>
+    <color name="ob_surface_alt">#EEF0F7</color>
+    <color name="ob_stroke">#E2E4EE</color>
+    <color name="ob_text">#161A2E</color>
+    <color name="ob_text_secondary">#6B7090</color>
+
+    <!-- Feedback -->
+    <color name="ob_success">#16A34A</color>
+    <color name="ob_success_soft">#DCFCE7</color>
+    <color name="ob_error">#E11D48</color>
+    <color name="ob_error_soft">#FFE4E6</color>
+
+    <!-- Game board -->
+    <color name="ob_cell_empty">#E4E7F2</color>
+    <color name="ob_cell_fill">#5B4BF5</color>
+
+    <!-- Categories -->
+    <color name="cat_logic">#7C5CFF</color>
+    <color name="cat_math">#3B82F6</color>
+    <color name="cat_memory">#EC4899</color>
+    <color name="cat_pattern">#F97316</color>
+    <color name="cat_visual">#14B8A6</color>
+    <color name="cat_sequence">#0EA5E9</color>
+    <color name="cat_spatial">#65A30D</color>
+    <color name="cat_word">#D97706</color>
+
+    <!-- Difficulty -->
+    <color name="diff_easy">#16A34A</color>
+    <color name="diff_medium">#2563EB</color>
+    <color name="diff_hard">#EA580C</color>
+    <color name="diff_expert">#DC2626</color>
+    <color name="diff_master">#9333EA</color>
+
+    <color name="ob_splash_bg">#5B4BF5</color>
+    <color name="ic_launcher_background">#5B4BF5</color>
+</resources>

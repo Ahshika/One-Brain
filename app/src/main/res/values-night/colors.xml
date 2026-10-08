@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ob_primary">#8F84FF</color>
+    <color name="ob_primary_variant">#A78BFA</color>
+    <color name="ob_on_primary">#0E1020</color>
+    <color name="ob_primary_soft">#2A2552</color>
+    <color name="ob_gold">#FFC14D</color>
+    <color name="ob_gold_soft">#3A2E12</color>
+
+    <color name="ob_bg">#0E1020</color>
+    <color name="ob_surface">#181B2E</color>
+    <color name="ob_surface_alt">#22263C</color>
+    <color name="ob_stroke">#2E3350</color>
+    <color name="ob_text">#F1F2FA</color>
+    <color name="ob_text_secondary">#A3A8C3</color>
+
+    <color name="ob_success">#34D399</color>
+    <color name="ob_success_soft">#123326</color>
+    <color name="ob_error">#FB7185</color>
+    <color name="ob_error_soft">#3B1320</color>
+
+    <color name="ob_cell_empty">#2A2F48</color>
+    <color name="ob_cell_fill">#8F84FF</color>
+
+    <color name="ob_splash_bg">#0E1020</color>
+</resources>
