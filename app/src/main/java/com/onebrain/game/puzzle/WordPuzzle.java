@@ -15,12 +15,16 @@ public final class WordPuzzle extends Puzzle implements Hintable {
     private final String answer;
     private final char[] letters;
     private final Set<String> accepted;
+    private final WordClue clue;
     private int revealedCount;
 
-    public WordPuzzle(Difficulty difficulty, long seed, String answer, char[] scrambled, Set<String> accepted) {
+    /** @param clue what the answer is about, shown to the player; may be {@code null}. */
+    public WordPuzzle(Difficulty difficulty, long seed, String answer, char[] scrambled, Set<String> accepted,
+                      WordClue clue) {
         super(PuzzleCategory.WORD, difficulty, seed, new Prompt(PromptKey.WORD_ANAGRAM), null);
         this.answer = answer;
         this.letters = scrambled.clone();
+        this.clue = clue;
         Set<String> all = new HashSet<>(accepted);
         all.add(answer);
         this.accepted = Collections.unmodifiableSet(all);
@@ -78,5 +82,10 @@ public final class WordPuzzle extends Puzzle implements Hintable {
 
     public Set<String> getAcceptedAnswers() {
         return accepted;
+    }
+
+    /** @return what the answer is about, or {@code null} if the word has no clue. */
+    public WordClue getClue() {
+        return clue;
     }
 }

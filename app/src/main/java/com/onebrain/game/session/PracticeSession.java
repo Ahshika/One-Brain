@@ -45,7 +45,7 @@ public final class PracticeSession extends GameSession {
 
     @Override
     public int getAttemptsPerPuzzle() {
-        return 2;
+        return ATTEMPTS_PER_PUZZLE;
     }
 
     @Override

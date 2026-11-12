@@ -1,5 +1,7 @@
 package com.onebrain.game.generator;
 
+import com.onebrain.game.puzzle.WordClue;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -97,6 +99,11 @@ public final class WordBank {
             throw new IllegalArgumentException("No words of length " + length);
         }
         return list;
+    }
+
+    /** @return the emoji + theme clue for a bank word, or {@code null} if it has none. */
+    public WordClue clueOf(String word) {
+        return WordClues.of(word);
     }
 
     public Set<String> anagramsOf(String word) {

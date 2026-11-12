@@ -24,7 +24,7 @@ public final class WeeklySession extends GameSession {
 
     @Override
     public int getAttemptsPerPuzzle() {
-        return 2;
+        return ATTEMPTS_PER_PUZZLE;
     }
 
     @Override

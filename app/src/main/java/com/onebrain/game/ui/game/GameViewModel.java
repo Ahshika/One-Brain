@@ -38,10 +38,10 @@ public final class GameViewModel extends ViewModel {
     private static final String KEY_PROGRESS = "session_progress";
     private static final String KEY_ELAPSED = "puzzle_elapsed";
     private static final String KEY_MISTAKES = "puzzle_mistakes";
+    private static final String KEY_RESULT = "session_result";
 
     public static final int HINT_COST = 25;
     private static final long DELAY_AFTER_CORRECT = 950L;
-    private static final long DELAY_AFTER_FAIL = 1600L;
 
     public enum Phase {
         /** Puzzle bound, renderer starting (may enter MEMORIZE). */
@@ -94,6 +94,10 @@ public final class GameViewModel extends ViewModel {
     private int mistakes;
     private boolean hostResumed;
     private boolean finished;
+    /** A failed puzzle's solution is on screen until the player taps Next. */
+    private boolean awaitingContinue;
+    /** Result committed while the last solution is still shown; delivered on Next. */
+    private SessionResult pendingResult;
 
     public GameViewModel(SavedStateHandle state) {
         this.state = state;
@@ -118,7 +122,14 @@ public final class GameViewModel extends ViewModel {
         stopwatch.reset(elapsed != null ? elapsed : 0L);
         mistakes = savedMistakes != null ? savedMistakes : 0;
 
-        if (session.isOver()) {
+        SessionResult committed = state.get(KEY_RESULT);
+        if (committed != null) {
+            // Restored after the session was already committed (e.g. process death
+            // while the last solution was shown): never record it twice.
+            finished = true;
+            phase.setValue(Phase.FINISHED);
+            result.setValue(committed);
+        } else if (session.isOver()) {
             finishSession();
         } else {
             puzzle.setValue(session.getCurrentPuzzle());
@@ -240,16 +251,47 @@ public final class GameViewModel extends ViewModel {
         ScoreResult r = game.recordPuzzle(session, current, correct, mistakes, stopwatch.elapsed());
         session.onPuzzleCompleted(r);
         phase.setValue(Phase.FEEDBACK);
-        answerEvents.setValue(new Event<>(new AnswerEvent(
-                correct ? AnswerEvent.Type.CORRECT : AnswerEvent.Type.FAILED, answer, r, 0)));
-        long delay = correct ? DELAY_AFTER_CORRECT : DELAY_AFTER_FAIL;
-        if (session.isOver()) {
-            // Commit the session right away (so nothing is lost if the app dies
-            // during the feedback animation); only the navigation is delayed.
-            SessionResult summary = commitSession();
-            handler.postDelayed(() -> result.setValue(summary), delay);
+        // Commit right away when this was the last puzzle, so nothing is lost if
+        // the app dies during the feedback; only the navigation waits.
+        SessionResult summary = session.isOver() ? commitSession() : null;
+        if (!correct) {
+            // Keep the revealed solution on screen until the player taps Next.
+            awaitingContinue = true;
+            pendingResult = summary;
+            answerEvents.setValue(new Event<>(new AnswerEvent(AnswerEvent.Type.FAILED, answer, r, 0)));
+            saveState();
+            return;
+        }
+        answerEvents.setValue(new Event<>(new AnswerEvent(AnswerEvent.Type.CORRECT, answer, r, 0)));
+        if (summary != null) {
+            handler.postDelayed(() -> result.setValue(summary), DELAY_AFTER_CORRECT);
         } else {
-            handler.postDelayed(this::advance, delay);
+            handler.postDelayed(this::advance, DELAY_AFTER_CORRECT);
+        }
+    }
+
+    /** True while a failed puzzle's solution is shown and waits for {@link #continueAfterReveal()}. */
+    public boolean isAwaitingContinue() {
+        return awaitingContinue;
+    }
+
+    /** True when the shown solution belongs to the last puzzle (Next opens the results). */
+    public boolean isRevealOfLastPuzzle() {
+        return pendingResult != null;
+    }
+
+    /** Player tapped Next after reading the revealed solution. */
+    public void continueAfterReveal() {
+        if (!awaitingContinue) {
+            return;
+        }
+        awaitingContinue = false;
+        if (pendingResult != null) {
+            SessionResult summary = pendingResult;
+            pendingResult = null;
+            result.setValue(summary);
+        } else {
+            advance();
         }
     }
 
@@ -303,6 +345,9 @@ public final class GameViewModel extends ViewModel {
         if (!finished) {
             stopwatch.pause();
             finishSession();
+        } else if (pendingResult != null) {
+            // Already committed while the last solution was shown.
+            continueAfterReveal();
         }
     }
 
@@ -324,7 +369,9 @@ public final class GameViewModel extends ViewModel {
             game.getPlayer().getStats().clearDailyProgress();
         }
         phase.setValue(Phase.FINISHED);
-        return game.finishSession(session);
+        SessionResult summary = game.finishSession(session);
+        state.set(KEY_RESULT, summary);
+        return summary;
     }
 
     private void saveState() {

@@ -27,7 +27,7 @@ public final class PackSession extends GameSession {
 
     @Override
     public int getAttemptsPerPuzzle() {
-        return 3;
+        return ATTEMPTS_PER_PUZZLE;
     }
 
     @Override
