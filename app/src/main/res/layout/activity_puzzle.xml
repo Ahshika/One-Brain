@@ -151,6 +151,37 @@
             android:paddingEnd="24dp"
             app:icon="@null"
             tools:text="💡 Hint · 25" />
+
+        <!-- Shown after the last attempt: the solution stays until the player taps Next. -->
+        <LinearLayout
+            android:id="@+id/reveal_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/screen_padding"
+            android:paddingEnd="@dimen/screen_padding"
+            android:paddingBottom="16dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/text_reveal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/puzzle_reveal_label"
+                android:textAppearance="@style/TextAppearance.OneBrain.Title"
+                android:textColor="@color/ob_success" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_next"
+                style="@style/Widget.OneBrain.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/puzzle_next" />
+        </LinearLayout>
     </LinearLayout>
 
     <TextView

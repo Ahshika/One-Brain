@@ -37,7 +37,7 @@ public final class WordPuzzleGenerator extends BasePuzzleGenerator {
                 break;
             }
         }
-        return new WordPuzzle(difficulty, seed, answer, letters, accepted);
+        return new WordPuzzle(difficulty, seed, answer, letters, accepted, bank.clueOf(answer));
     }
 
     private static void shuffle(char[] a, Random r) {

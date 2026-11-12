@@ -11,6 +11,8 @@ import com.onebrain.game.core.GameMode;
 import com.onebrain.game.core.PuzzleCategory;
 import com.onebrain.game.puzzle.Prompt;
 import com.onebrain.game.puzzle.PromptKey;
+import com.onebrain.game.puzzle.WordClue;
+import com.onebrain.game.puzzle.WordTheme;
 
 import java.text.NumberFormat;
 
@@ -80,6 +82,74 @@ public final class UiText {
             case WORD_ANAGRAM:
             default:
                 return R.string.prompt_word_anagram;
+        }
+    }
+
+    /** "Hint: 🐦 Animal" — tells the player what the scrambled word is about. */
+    public static String wordClue(Context context, WordClue clue) {
+        return context.getString(R.string.word_clue, clue.getEmoji(), context.getString(themeName(clue.getTheme())));
+    }
+
+    @StringRes
+    public static int themeName(WordTheme t) {
+        switch (t) {
+            case ANIMAL:
+                return R.string.theme_animal;
+            case FOOD:
+                return R.string.theme_food;
+            case NATURE:
+                return R.string.theme_nature;
+            case WEATHER:
+                return R.string.theme_weather;
+            case SPACE:
+                return R.string.theme_space;
+            case PLACE:
+                return R.string.theme_place;
+            case HOME:
+                return R.string.theme_home;
+            case OBJECT:
+                return R.string.theme_object;
+            case MATERIAL:
+                return R.string.theme_material;
+            case PERSON:
+                return R.string.theme_person;
+            case BODY:
+                return R.string.theme_body;
+            case CLOTHING:
+                return R.string.theme_clothing;
+            case TRANSPORT:
+                return R.string.theme_transport;
+            case TECH:
+                return R.string.theme_tech;
+            case MUSIC:
+                return R.string.theme_music;
+            case SPORT:
+                return R.string.theme_sport;
+            case FUN:
+                return R.string.theme_fun;
+            case LEARNING:
+                return R.string.theme_learning;
+            case IDEA:
+                return R.string.theme_idea;
+            case FEELING:
+                return R.string.theme_feeling;
+            case COLOR:
+                return R.string.theme_color;
+            case SHAPE:
+                return R.string.theme_shape;
+            case TIME:
+                return R.string.theme_time;
+            case FANTASY:
+                return R.string.theme_fantasy;
+            case VALUABLE:
+                return R.string.theme_valuable;
+            case CELEBRATION:
+                return R.string.theme_celebration;
+            case ACTION:
+                return R.string.theme_action;
+            case NUMBER:
+            default:
+                return R.string.theme_number;
         }
     }
 

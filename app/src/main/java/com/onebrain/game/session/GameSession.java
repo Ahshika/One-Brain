@@ -13,6 +13,9 @@ import com.onebrain.game.util.SeedUtil;
  */
 public abstract class GameSession {
 
+    /** Tries every mode gives per puzzle before it counts as failed and the answer is shown. */
+    public static final int ATTEMPTS_PER_PUZZLE = 3;
+
     private final GameMode mode;
     private final long baseSeed;
     private final SessionProgress progress;

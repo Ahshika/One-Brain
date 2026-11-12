@@ -22,6 +22,7 @@ import com.onebrain.game.puzzle.WordPuzzle;
 import com.onebrain.game.puzzle.answer.Answer;
 import com.onebrain.game.puzzle.answer.TextAnswer;
 import com.onebrain.game.ui.common.Anim;
+import com.onebrain.game.ui.common.UiText;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -70,7 +71,17 @@ public final class WordRenderer implements PuzzleRenderer {
             slotRow.addView(slot, params(size, margin));
             slots[i] = slot;
         }
-        visualContainer.addView(slotRow, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+        LinearLayout board = new LinearLayout(ctx);
+        board.setOrientation(LinearLayout.VERTICAL);
+        board.setGravity(Gravity.CENTER_HORIZONTAL);
+        if (puzzle.getClue() != null) {
+            LinearLayout.LayoutParams cp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            cp.bottomMargin = (int) (14 * density);
+            board.addView(clueView(ctx, density), cp);
+        }
+        board.addView(slotRow);
+        visualContainer.addView(board, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL));
 
         LinearLayout column = new LinearLayout(ctx);
@@ -117,6 +128,21 @@ public final class WordRenderer implements PuzzleRenderer {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(size, size);
         lp.setMargins(margin, margin, margin, margin);
         return lp;
+    }
+
+    /** "Hint: 🐦 Animal" pill, so the player knows which word the letters form. */
+    private TextView clueView(Context ctx, float density) {
+        TextView tv = new TextView(ctx);
+        tv.setText(UiText.wordClue(ctx, puzzle.getClue()));
+        tv.setBackgroundResource(R.drawable.bg_pill);
+        tv.setGravity(Gravity.CENTER);
+        int h = (int) (16 * density);
+        int v = (int) (8 * density);
+        tv.setPadding(h, v, h, v);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
+        tv.setTypeface(Typeface.DEFAULT_BOLD);
+        tv.setTextColor(ContextCompat.getColor(ctx, R.color.ob_text));
+        return tv;
     }
 
     private static TextView letterView(Context ctx, int size) {

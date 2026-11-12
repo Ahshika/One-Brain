@@ -74,6 +74,9 @@
     <string name="ad_not_ready">No video available right now. Please try again later.</string>
     <string name="feedback_correct">Correct! +%1$d</string>
     <string name="feedback_failed">Out of attempts</string>
+    <string name="puzzle_reveal_label">✅ Here is the correct answer</string>
+    <string name="puzzle_next">Next</string>
+    <string name="puzzle_see_results">See results</string>
     <string name="feedback_penalty">−5s</string>
     <string name="quit_title">Leave puzzle?</string>
     <string name="quit_msg_daily">Your timer is saved. You can continue later today.</string>
@@ -110,6 +113,35 @@
     <string name="prompt_spatial_mirror_v">Which option is this shape flipped upside down?</string>
     <string name="prompt_spatial_rotate_mirror">Rotate 90° clockwise, then mirror left ↔ right. Which option matches?</string>
     <string name="prompt_word_anagram">Unscramble the letters to make a word</string>
+    <string name="word_clue">Hint: %1$s %2$s</string>
+    <string name="theme_animal">Animal</string>
+    <string name="theme_food">Food &amp; drink</string>
+    <string name="theme_nature">Nature</string>
+    <string name="theme_weather">Weather</string>
+    <string name="theme_space">Space</string>
+    <string name="theme_place">Place</string>
+    <string name="theme_home">At home</string>
+    <string name="theme_object">Object</string>
+    <string name="theme_material">Material</string>
+    <string name="theme_person">Person</string>
+    <string name="theme_body">Body &amp; health</string>
+    <string name="theme_clothing">Clothing</string>
+    <string name="theme_transport">Transport</string>
+    <string name="theme_tech">Technology</string>
+    <string name="theme_music">Music</string>
+    <string name="theme_sport">Sport</string>
+    <string name="theme_fun">Games &amp; fun</string>
+    <string name="theme_learning">Learning</string>
+    <string name="theme_idea">Idea</string>
+    <string name="theme_feeling">Feeling</string>
+    <string name="theme_color">Colour</string>
+    <string name="theme_shape">Shape</string>
+    <string name="theme_time">Time</string>
+    <string name="theme_fantasy">Fantasy</string>
+    <string name="theme_valuable">Treasure</string>
+    <string name="theme_celebration">Celebration</string>
+    <string name="theme_action">Action</string>
+    <string name="theme_number">Number</string>
 
     <!-- Result -->
     <string name="result_brilliant">Brilliant!</string>

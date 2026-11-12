@@ -76,6 +76,10 @@ public final class PuzzleActivity extends BaseActivity implements PuzzleRenderer
 
         binding.btnClose.setOnClickListener(v -> confirmQuit());
         binding.btnHint.setOnClickListener(v -> onHintClicked());
+        binding.btnNext.setOnClickListener(v -> {
+            binding.revealBar.setVisibility(View.GONE);
+            viewModel.continueAfterReveal();
+        });
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -132,7 +136,8 @@ public final class PuzzleActivity extends BaseActivity implements PuzzleRenderer
         binding.chipDifficulty.setText(UiText.difficultyName(puzzle.getDifficulty()));
         binding.chipDifficulty.setTextColor(ContextCompat.getColor(this, UiText.difficultyColor(puzzle.getDifficulty())));
 
-        boolean resume = viewModel.isPuzzleStarted();
+        boolean revealing = viewModel.isAwaitingContinue();
+        boolean resume = viewModel.isPuzzleStarted() || revealing;
         renderer = RendererFactory.create(puzzle);
         renderer.bind(puzzle, binding.visualContainer, binding.inputContainer, resume, this);
         if (resume && puzzle instanceof Memorizable) {
@@ -141,8 +146,21 @@ public final class PuzzleActivity extends BaseActivity implements PuzzleRenderer
         if (!resume) {
             Anim.enter(binding.puzzleContent);
         }
+        if (revealing) {
+            // Recreated (e.g. rotation) while the solution was on screen.
+            renderer.revealSolution();
+        }
+        showRevealBar(revealing);
         updateHeader();
         updateTimer();
+    }
+
+    private void showRevealBar(boolean show) {
+        binding.revealBar.setVisibility(show ? View.VISIBLE : View.GONE);
+        if (show) {
+            binding.btnNext.setText(viewModel.isRevealOfLastPuzzle()
+                    ? R.string.puzzle_see_results : R.string.puzzle_next);
+        }
     }
 
     private void updateHeader() {
@@ -169,7 +187,7 @@ public final class PuzzleActivity extends BaseActivity implements PuzzleRenderer
         }
 
         binding.textCoins.setText("🪙 " + UiText.number(game().getPlayer().getWallet().getCoins()));
-        boolean hintsAllowed = session.allowsHints();
+        boolean hintsAllowed = session.allowsHints() && !viewModel.isAwaitingContinue();
         binding.btnHint.setVisibility(hintsAllowed ? View.VISIBLE : View.GONE);
         binding.btnHint.setText("💡 " + getString(R.string.puzzle_hint, GameViewModel.HINT_COST));
         binding.btnHint.setEnabled(viewModel.canUseHint());
@@ -250,6 +268,8 @@ public final class PuzzleActivity extends BaseActivity implements PuzzleRenderer
                 String failMsg = viewModel.getSession().getWrongPenaltyMillis() > 0
                         ? getString(R.string.feedback_penalty) : getString(R.string.feedback_failed);
                 showFeedback(failMsg, R.color.ob_error);
+                showRevealBar(true);
+                Anim.pop(binding.btnNext);
                 break;
         }
         updateHeader();

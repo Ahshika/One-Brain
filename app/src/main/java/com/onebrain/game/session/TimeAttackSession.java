@@ -37,7 +37,7 @@ public final class TimeAttackSession extends GameSession {
 
     @Override
     public int getAttemptsPerPuzzle() {
-        return 1;
+        return ATTEMPTS_PER_PUZZLE;
     }
 
     @Override

@@ -11,8 +11,8 @@ import java.util.Random;
 /**
  * The Challenge Path: an open, level-based campaign that never ends and keeps
  * getting harder. Levels are grouped in stages of 10; each stage tightens the
- * rules (harder puzzles, more puzzles per level, fewer attempts, a clock, no
- * hints). After the 10 named stages come endless "Infinity" stages where the
+ * rules (harder puzzles, more puzzles per level, a clock, no hints); every
+ * stage keeps 3 attempts per puzzle. After the 10 named stages come endless "Infinity" stages where the
  * clock keeps shrinking.
  */
 public final class ChallengePath {
@@ -47,14 +47,14 @@ public final class ChallengePath {
             //            low                high               puzzles attempts time hints
             new StageRule(Difficulty.EASY,   Difficulty.EASY,   1, 3, 0,   true),  // 1 Beginner
             new StageRule(Difficulty.EASY,   Difficulty.MEDIUM, 2, 3, 0,   true),  // 2 Apprentice
-            new StageRule(Difficulty.MEDIUM, Difficulty.MEDIUM, 2, 2, 0,   true),  // 3 Thinker
-            new StageRule(Difficulty.MEDIUM, Difficulty.HARD,   3, 2, 150, true),  // 4 Strategist
-            new StageRule(Difficulty.HARD,   Difficulty.HARD,   3, 2, 130, true),  // 5 Challenger
-            new StageRule(Difficulty.HARD,   Difficulty.EXPERT, 3, 2, 130, true),  // 6 Expert
-            new StageRule(Difficulty.EXPERT, Difficulty.EXPERT, 3, 1, 120, true),  // 7 Mastermind
-            new StageRule(Difficulty.EXPERT, Difficulty.MASTER, 4, 1, 150, false), // 8 Genius
-            new StageRule(Difficulty.MASTER, Difficulty.MASTER, 4, 1, 140, false), // 9 Legend
-            new StageRule(Difficulty.MASTER, Difficulty.MASTER, 5, 1, 160, false), // 10 One Brain
+            new StageRule(Difficulty.MEDIUM, Difficulty.MEDIUM, 2, 3, 0,   true),  // 3 Thinker
+            new StageRule(Difficulty.MEDIUM, Difficulty.HARD,   3, 3, 150, true),  // 4 Strategist
+            new StageRule(Difficulty.HARD,   Difficulty.HARD,   3, 3, 130, true),  // 5 Challenger
+            new StageRule(Difficulty.HARD,   Difficulty.EXPERT, 3, 3, 130, true),  // 6 Expert
+            new StageRule(Difficulty.EXPERT, Difficulty.EXPERT, 3, 3, 120, true),  // 7 Mastermind
+            new StageRule(Difficulty.EXPERT, Difficulty.MASTER, 4, 3, 150, false), // 8 Genius
+            new StageRule(Difficulty.MASTER, Difficulty.MASTER, 4, 3, 140, false), // 9 Legend
+            new StageRule(Difficulty.MASTER, Difficulty.MASTER, 5, 3, 160, false), // 10 One Brain
     };
 
     public int stageOf(int levelIndex) {

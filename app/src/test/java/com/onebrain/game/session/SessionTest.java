@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
+import com.onebrain.game.core.ChallengePath;
 import com.onebrain.game.core.DailyPuzzleManager;
 import com.onebrain.game.core.DateProvider;
 import com.onebrain.game.core.Difficulty;
@@ -79,6 +80,30 @@ public class SessionTest {
             s.onPuzzleCompleted(ok());
         }
         assertTrue(s.isOver());
+    }
+
+    @Test
+    public void everyModeGivesThreeAttemptsPerPuzzle() {
+        DailyPuzzleManager daily = new DailyPuzzleManager(factory, dates);
+        WeeklyChallengeManager weekly = new WeeklyChallengeManager(factory, dates);
+        PuzzlePack starter = new PackManager().find(PackManager.STARTER);
+        GameSession[] sessions = {
+                new EndlessSession(factory, 1L, null),
+                new TimeAttackSession(factory, 1L, null),
+                new PracticeSession(factory, new DifficultyManager(), new Player().getStats(),
+                        PuzzleCategory.LOGIC, null, 1L, null),
+                new DailySession(daily, daily.today(), null),
+                new WeeklySession(weekly, weekly.currentWeek(), null),
+                new PackSession(factory, starter, 0, null),
+        };
+        for (GameSession s : sessions) {
+            assertEquals(s.getMode().name(), 3, s.getAttemptsPerPuzzle());
+        }
+        ChallengePath path = new ChallengePath();
+        for (int level = 0; level < 300; level += 7) {
+            assertEquals("challenge level " + level, 3,
+                    new ChallengeSession(factory, path, level, null).getAttemptsPerPuzzle());
+        }
     }
 
     @Test
