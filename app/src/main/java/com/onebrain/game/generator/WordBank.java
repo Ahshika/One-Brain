@@ -1,6 +1,6 @@
 package com.onebrain.game.generator;
 
-import com.onebrain.game.puzzle.WordClue;
+import com.onebrain.game.puzzle.WordTheme;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -101,8 +101,8 @@ public final class WordBank {
         return list;
     }
 
-    /** @return the emoji + theme clue for a bank word, or {@code null} if it has none. */
-    public WordClue clueOf(String word) {
+    /** @return the theme of a bank word, or {@code null} if it has none. */
+    public WordTheme themeOf(String word) {
         return WordClues.of(word);
     }
 

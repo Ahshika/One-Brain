@@ -113,7 +113,7 @@
     <string name="prompt_spatial_mirror_v">Which option is this shape flipped upside down?</string>
     <string name="prompt_spatial_rotate_mirror">Rotate 90° clockwise, then mirror left ↔ right. Which option matches?</string>
     <string name="prompt_word_anagram">Unscramble the letters to make a word</string>
-    <string name="word_clue">Hint: %1$s %2$s</string>
+    <string name="word_clue">Hint: %1$s</string>
     <string name="theme_animal">Animal</string>
     <string name="theme_food">Food &amp; drink</string>
     <string name="theme_nature">Nature</string>

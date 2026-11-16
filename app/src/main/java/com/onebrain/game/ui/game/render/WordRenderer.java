@@ -74,14 +74,17 @@ public final class WordRenderer implements PuzzleRenderer {
         LinearLayout board = new LinearLayout(ctx);
         board.setOrientation(LinearLayout.VERTICAL);
         board.setGravity(Gravity.CENTER_HORIZONTAL);
-        if (puzzle.getClue() != null) {
+        if (puzzle.getTheme() != null) {
             LinearLayout.LayoutParams cp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
             cp.bottomMargin = (int) (14 * density);
             board.addView(clueView(ctx, density), cp);
         }
-        board.addView(slotRow);
-        visualContainer.addView(board, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+        // Explicit WRAP_CONTENT: the vertical layout's default MATCH_PARENT would
+        // squeeze the slot row to the clue's width and clip the outer slots.
+        board.addView(slotRow, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+        visualContainer.addView(board, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL));
 
         LinearLayout column = new LinearLayout(ctx);
@@ -130,10 +133,10 @@ public final class WordRenderer implements PuzzleRenderer {
         return lp;
     }
 
-    /** "Hint: 🐦 Animal" pill, so the player knows which word the letters form. */
+    /** "Hint: Animal" pill (easier puzzles only), so the player knows which word the letters form. */
     private TextView clueView(Context ctx, float density) {
         TextView tv = new TextView(ctx);
-        tv.setText(UiText.wordClue(ctx, puzzle.getClue()));
+        tv.setText(UiText.wordClue(ctx, puzzle.getTheme()));
         tv.setBackgroundResource(R.drawable.bg_pill);
         tv.setGravity(Gravity.CENTER);
         int h = (int) (16 * density);
