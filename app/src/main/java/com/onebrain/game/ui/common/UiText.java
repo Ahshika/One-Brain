@@ -11,7 +11,6 @@ import com.onebrain.game.core.GameMode;
 import com.onebrain.game.core.PuzzleCategory;
 import com.onebrain.game.puzzle.Prompt;
 import com.onebrain.game.puzzle.PromptKey;
-import com.onebrain.game.puzzle.WordClue;
 import com.onebrain.game.puzzle.WordTheme;
 
 import java.text.NumberFormat;
@@ -85,9 +84,9 @@ public final class UiText {
         }
     }
 
-    /** "Hint: 🐦 Animal" — tells the player what the scrambled word is about. */
-    public static String wordClue(Context context, WordClue clue) {
-        return context.getString(R.string.word_clue, clue.getEmoji(), context.getString(themeName(clue.getTheme())));
+    /** "Hint: Animal" — tells the player what the scrambled word is about. */
+    public static String wordClue(Context context, WordTheme theme) {
+        return context.getString(R.string.word_clue, context.getString(themeName(theme)));
     }
 
     @StringRes

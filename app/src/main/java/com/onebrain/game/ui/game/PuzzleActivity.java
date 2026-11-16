@@ -167,6 +167,10 @@ public final class PuzzleActivity extends BaseActivity implements PuzzleRenderer
         GameSession session = viewModel.getSession();
         int total = session.getTotalPuzzles();
         int index = session.getProgress().getIndex();
+        if (viewModel.isAwaitingContinue()) {
+            // The shown (failed) puzzle is already counted; keep its own number until Next.
+            index = Math.max(0, index - 1);
+        }
         if (total > 1) {
             binding.textProgress.setText(getString(R.string.puzzle_progress, Math.min(index + 1, total), total));
             binding.textProgress.setVisibility(View.VISIBLE);

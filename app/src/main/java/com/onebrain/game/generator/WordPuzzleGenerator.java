@@ -4,6 +4,7 @@ import com.onebrain.game.core.Difficulty;
 import com.onebrain.game.core.PuzzleCategory;
 import com.onebrain.game.puzzle.Puzzle;
 import com.onebrain.game.puzzle.WordPuzzle;
+import com.onebrain.game.puzzle.WordTheme;
 
 import java.util.List;
 import java.util.Random;
@@ -37,7 +38,9 @@ public final class WordPuzzleGenerator extends BasePuzzleGenerator {
                 break;
             }
         }
-        return new WordPuzzle(difficulty, seed, answer, letters, accepted, bank.clueOf(answer));
+        // Only easier puzzles get the theme clue; from Hard up the player is on their own.
+        WordTheme theme = difficulty.ordinal() <= Difficulty.MEDIUM.ordinal() ? bank.themeOf(answer) : null;
+        return new WordPuzzle(difficulty, seed, answer, letters, accepted, theme);
     }
 
     private static void shuffle(char[] a, Random r) {

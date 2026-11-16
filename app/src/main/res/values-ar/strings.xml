@@ -105,7 +105,7 @@
     <string name="prompt_spatial_mirror_v">أي خيار هو الشكل مقلوبًا رأسًا على عقب؟</string>
     <string name="prompt_spatial_rotate_mirror">دوّر الشكل 90° مع عقارب الساعة ثم اعكسه يمين ↔ يسار. أي خيار يطابقه؟</string>
     <string name="prompt_word_anagram">رتّب الحروف لتكوين كلمة</string>
-    <string name="word_clue">تلميح: %1$s %2$s</string>
+    <string name="word_clue">تلميح: %1$s</string>
     <string name="theme_animal">حيوان</string>
     <string name="theme_food">طعام وشراب</string>
     <string name="theme_nature">طبيعة</string>
